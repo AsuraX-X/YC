@@ -11,7 +11,7 @@ const Navbar = async () => {
         <Link href={"/"}>
           <Image src="/logo.svg" alt="logo" width={40} height={40} />
         </Link>
-        <div className="flex item-center gap-5">
+        <div className="flex item-center gap-5 ">
           {session && session?.user ? (
             <>
               <Link href={"/startup/create"}>
