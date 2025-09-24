@@ -10,13 +10,17 @@ const StartupCard = ({ post }: { post: post }) => {
   const {
     _createdAt,
     _id,
-    author: { _id: authorId, name },
-    views,
     category,
+    author,
     description,
     image,
+    name,
     title,
+    views,
   } = post;
+
+  const { id, image: AuthorImage } = author;
+
   return (
     <div className="bg-white border-[5px] border-black py-6 px-5 rounded-[22px] w-full shadow-200 hover:border-primary transition-all duration-500 hover:shadow-300 hover:bg-primary-100 group">
       <div className="flex items-center justify-between">
@@ -30,7 +34,7 @@ const StartupCard = ({ post }: { post: post }) => {
       </div>
       <div className="flex justify-between items-center mt-5 gap-5">
         <div className="flex-1">
-          <Link href={`/user/${authorId}`}>
+          <Link href={`/user/${id}`}>
             <p className="font-medium text-[16px] text-black line-clamp-1">
               {name}
             </p>
@@ -41,16 +45,16 @@ const StartupCard = ({ post }: { post: post }) => {
             </h3>
           </Link>
         </div>
-        <Link href={`/user/${authorId}`}>
-          <Image
-            src="https://placehold.co/48x48"
-            unoptimized
-            alt={description}
-            width={48}
-            height={48}
-            className="rounded-full"
-          />
-        </Link>
+          <Link href={`/user/${id}`}>
+            <Image
+              src={AuthorImage}
+              unoptimized
+              alt={description}
+              width={48}
+              height={48}
+              className="rounded-full"
+            />
+          </Link>
       </div>
       <Link href={`/startup/${_id}`}>
         <p className="font-normal text-[16px] line-clamp-2 my-3 text-black-100 break-all">
@@ -69,7 +73,10 @@ const StartupCard = ({ post }: { post: post }) => {
         <Link href={`/?query=${category.toLowerCase()}`}>
           <p className="font-medium text-[16px] text-black">{category}</p>
         </Link>
-        <Button className="rounded-full bg-black-200 font-medium text-[16px] text-white px-5 py-3" asChild>
+        <Button
+          className="rounded-full bg-black-200 font-medium text-[16px] text-white px-5 py-3"
+          asChild
+        >
           <Link href={`/startup/${_id}`}>Details</Link>
         </Button>
       </div>

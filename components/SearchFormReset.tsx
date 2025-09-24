@@ -13,6 +13,7 @@ const SearchFormReset = () => {
 
   return (
     <button
+      type="button"
       className="flex justify-center items-center size-12 rounded-full bg-black text-white"
       onClick={reset}
     >

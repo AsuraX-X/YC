@@ -51,16 +51,17 @@
   }
 
   .pattern {
-    background-image: linear-gradient(
-      to right,
-      transparent 49.5%,
-      rgba(251, 232, 67, 0.2) 49.5%,
-      rgba(251, 232, 67, 0.6) 50.5%,
-      transparent 50.5%
+    --pattern-angle: 45deg;
+    --stripe-gap: 60px;
+    --stripe-thickness: 1px;
+
+    background-image: repeating-linear-gradient(
+      var(--pattern-angle),
+      transparent 0 calc(var(--stripe-gap) - var(--stripe-thickness)),
+      rgba(255, 255, 255, 0.5) calc(var(--stripe-gap) - var(--stripe-thickness))
+        var(--stripe-gap)
     );
-    background-size: 5% 100%;
     background-position: center;
-    background-repeat: repeat-x;
   }
 }
 
@@ -97,4 +98,3 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
-

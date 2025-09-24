@@ -1,15 +1,26 @@
 import React from "react";
 import SearchForm from "../../components/SearchForm";
 import StartupCard from "@/components/StartupCard";
+import { client } from "@/sanity/lib/client";
+import { STARTUPS_QUERY } from "@/sanity/lib/queries";
+import { Slug } from "sanity";
 
+interface author {
+  id: number;
+  name: string;
+  image: string;
+  bio: string;
+}
 export interface post {
   _createdAt: Date;
-  views: number;
-  author: { _id: number; name: string };
+  name: string;
   _id: number;
+  slug: Slug;
+  author: author;
+  views: number;
   description: string;
-  image: string;
   category: string;
+  image: string;
   title: string;
 }
 
@@ -18,25 +29,13 @@ const Home = async ({
 }: {
   searchParams: Promise<{ query?: string }>;
 }) => {
-  const { query } = await searchParams;
+  const query = (await searchParams).query;
 
-  const posts: post[] = [
-    {
-      _createdAt: new Date(),
-      views: 55,
-      author: { _id: 1, name: "Micheal Scott" },
-      _id: 1,
-      description: "This is a description",
-      image:
-        "https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-      category: "Office",
-      title: "The Office",
-    },
-  ];
+  const posts: post[] = await client.fetch(STARTUPS_QUERY);
 
   return (
     <>
-      <section className="flex justify-center items-center bg-primary h-120  pattern flex-col px-6">
+      <section className="flex justify-center items-center bg-primary h-screen sm:h-fit py-8 min-h-135  pattern flex-col px-6">
         <h1 className="heading">
           Pitch your Start Up,
           <br />
