@@ -1,12 +1,12 @@
-import { post } from "@/app/(root)/page";
 import { formatDate } from "@/lib/utils";
 import { EyeIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
+import { StartUpCardType } from "@/sanity/types";
 
-const StartupCard = ({ post }: { post: post }) => {
+const StartupCard = ({ startup }: { startup: StartUpCardType }) => {
   const {
     _createdAt,
     _id,
@@ -14,12 +14,9 @@ const StartupCard = ({ post }: { post: post }) => {
     author,
     description,
     image,
-    name,
     title,
     views,
-  } = post;
-
-  const { id, image: AuthorImage } = author;
+  } = startup;
 
   return (
     <div className="bg-white border-[5px] border-black py-6 px-5 rounded-[22px] w-full shadow-200 hover:border-primary transition-all duration-500 hover:shadow-300 hover:bg-primary-100 group">
@@ -34,9 +31,9 @@ const StartupCard = ({ post }: { post: post }) => {
       </div>
       <div className="flex justify-between items-center mt-5 gap-5">
         <div className="flex-1">
-          <Link href={`/user/${id}`}>
+          <Link href={`/user/${author?._id}`}>
             <p className="font-medium text-[16px] text-black line-clamp-1">
-              {name}
+              {author?.name}
             </p>
           </Link>
           <Link href={`/startup/${_id}`}>
@@ -45,24 +42,24 @@ const StartupCard = ({ post }: { post: post }) => {
             </h3>
           </Link>
         </div>
-          <Link href={`/user/${id}`}>
-            <Image
-              src={AuthorImage}
-              unoptimized
-              alt={description}
-              width={48}
-              height={48}
-              className="rounded-full"
-            />
-          </Link>
+        <Link href={`/user/${author?._id}`}>
+          <Image
+            src={author?.image || "https://placehold.co/48x48"}
+            unoptimized
+            alt={author?.name || "Author name"}
+            width={48}
+            height={48}
+            className="rounded-full"
+          />
+        </Link>
       </div>
       <Link href={`/startup/${_id}`}>
         <p className="font-normal text-[16px] line-clamp-2 my-3 text-black-100 break-all">
           {description}
         </p>
         <Image
-          src={image}
-          alt={description}
+          src={image || "https://placehold.co/82x164"}
+          alt={description || "Description"}
           className="w-full h-[164px] rounded-[10px] object-cover"
           unoptimized
           width={82}
@@ -70,7 +67,7 @@ const StartupCard = ({ post }: { post: post }) => {
         />
       </Link>
       <div className="flex items-center justify-between gap-3 mt-5">
-        <Link href={`/?query=${category.toLowerCase()}`}>
+        <Link href={`/?query=${category?.toLowerCase()}`}>
           <p className="font-medium text-[16px] text-black">{category}</p>
         </Link>
         <Button

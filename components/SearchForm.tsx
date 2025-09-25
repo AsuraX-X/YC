@@ -7,14 +7,14 @@ const SearchForm = ({ query }: { query?: string }) => {
     <Form
       action={"/"}
       scroll={false}
-      className="bg-white flex items-center rounded-full px-6 border-4 mt-8 border-black w-full max-w-238 search-form"
+      className="bg-white flex items-center rounded-full px-2 border-4 mt-8 border-black w-full max-w-238 search-form"
     >
       <input
         type="text"
         name="query"
         defaultValue={query}
         placeholder="Search Startups"
-        className="focus:outline-0 text-2xl w-full placeholder:text-black font-bold py-4"
+        className="focus:outline-0 text-2xl w-full placeholder:text-black/90 font-bold py-4 px-2"
       />
       <div className="flex gap-1.5 justify-center items-center">
         {query && <SearchFormReset />}

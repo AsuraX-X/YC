@@ -58,7 +58,7 @@
     background-image: repeating-linear-gradient(
       var(--pattern-angle),
       transparent 0 calc(var(--stripe-gap) - var(--stripe-thickness)),
-      rgba(255, 255, 255, 0.5) calc(var(--stripe-gap) - var(--stripe-thickness))
+      #c8c8c88e calc(var(--stripe-gap) - var(--stripe-thickness))
         var(--stripe-gap)
     );
     background-position: center;
