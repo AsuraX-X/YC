@@ -8,6 +8,7 @@ import { notFound } from "next/navigation";
 import markdownit from "markdown-it";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import View from "@/components/View";
 
 const md = markdownit();
 
@@ -34,8 +35,6 @@ const StartupPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { _id, name, image: AuthorImage, username } = author || {};
 
   const rpitch = md.render(pitch || "");
-
-  console.log(rpitch);
 
   return (
     <div>
@@ -108,7 +107,9 @@ const StartupPage = async ({ params }: { params: Promise<{ id: string }> }) => {
         fallback={
           <Skeleton className="bg-zinc-400 h-10 w-24 rounded-lg fixed bottom-3 right-3" />
         }
-      ></Suspense>
+      >
+        <View id={id} />
+      </Suspense>
     </div>
   );
 };

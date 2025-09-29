@@ -4,6 +4,7 @@ import StartupCard from "@/components/StartupCard";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 import { StartUpCardType } from "@/sanity/types";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
+import { auth } from "@/auth";
 
 const Home = async ({
   searchParams,
@@ -14,6 +15,10 @@ const Home = async ({
 
   const params = { search: query || null };
 
+  const session = await auth();
+
+  console.log(session?.id);
+
   const { data: startups } = await sanityFetch({
     query: STARTUPS_QUERY,
     params,
@@ -21,11 +26,11 @@ const Home = async ({
 
   return (
     <>
-      <section className="flex justify-center items-center bg-primary h-screen sm:h-fit py-8 min-h-135  pattern flex-col px-6">
+      <section className="flex justify-center items-center bg-primary h-screen sm:h-fit py-10  pattern flex-col px-8">
         <h1 className="heading">
           Pitch your Start Up,
           <br />
-          Connect with interprenuers
+          Connect with entrepreneurs
         </h1>
         <p className="text-white font-medium text-2xl text-center">
           Submit Ideas, Vote on Pitches, and Get Noticed in Virtual
