@@ -2,6 +2,7 @@
   "name": "yc",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build --turbopack",
@@ -34,7 +35,8 @@
     "server-only": "^0.0.1",
     "sonner": "^2.0.7",
     "styled-components": "^6.1.19",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "zod": "^4.1.11"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
